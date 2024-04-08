@@ -21,8 +21,7 @@ echo 'Creating Jiri table'.PHP_EOL;
 $create_jiri_table_sql = <<<SQL
     create table jiris
     (
-        id          int auto_increment
-            primary key,
+        id          int auto_increment primary key,
         name        varchar(255)                        not null,
         starting_at timestamp                           not null comment 'Indicates the moment the jiri should start',
         created_at  timestamp default CURRENT_TIMESTAMP null,
@@ -30,5 +29,19 @@ $create_jiri_table_sql = <<<SQL
     );
 SQL;
 
+echo 'Creating auth table'.PHP_EOL;
+$create_auth_table_sql = <<<SQL
+    create table users
+    (
+        id          int auto_increment primary key,
+        email       varchar(255) not null,
+        password    varchar(255) not null,
+        created_at  timestamp default CURRENT_TIMESTAMP null,
+        updated_at  timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP
+    )
+SQL;
+
 $db->exec($create_jiri_table_sql);
 echo 'Jiri table created'.PHP_EOL;
+$db->exec($create_auth_table_sql);
+echo 'Users table created';

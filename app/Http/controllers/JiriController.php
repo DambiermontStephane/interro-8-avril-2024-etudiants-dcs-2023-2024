@@ -128,4 +128,5 @@ class JiriController
 
         Response::redirect('/jiris');
     }
+
 }

@@ -12,8 +12,24 @@ $jiris = [
     ['name' => 'Projets Web 2027', 'starting_at' => '2027-01-19 08:30:00'],
     ['name' => 'Design Web 2023', 'starting_at' => '2023-06-19 08:30:00'],
 ];
+
+$users = [
+    ['email' => 'xyz@gmail.com', 'password' => 'abc1'],
+    ['email' => 'xyzz@gmail.com', 'password' => 'abc12'],
+    ['email' => 'xyzzz@gmail.com', 'password' => 'abc123'],
+    ['email' => 'xyzzzz@gmail.com', 'password' => 'abc1234'],
+];
+
+
 $insert_jiri_in_jiris_table_sql = 'INSERT INTO jiris (name, starting_at) VALUES (:name, :starting_at)';
+$insert_jiri_in_auth_table_sql = 'INSERT INTO authentifications (name, password) VALUES (:name, :password)';
 $insert_jiri_in_jiris_table_stmt = $db->prepare($insert_jiri_in_jiris_table_sql);
+$insert_jiri_in_auth_table_stmt = $db->prepare($insert_jiri_in_auth_table_sql);
+foreach ($jiris as $jiri) {
+    $insert_jiri_in_jiris_table_stmt->bindValue('name', $jiri['name']);
+    $insert_jiri_in_jiris_table_stmt->bindValue('starting_at', $jiri['starting_at']);
+    $insert_jiri_in_jiris_table_stmt->execute();
+}
 foreach ($jiris as $jiri) {
     $insert_jiri_in_jiris_table_stmt->bindValue('name', $jiri['name']);
     $insert_jiri_in_jiris_table_stmt->bindValue('starting_at', $jiri['starting_at']);
